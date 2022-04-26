@@ -1,17 +1,22 @@
 const fingers = ['thumb', 'index', 'middle', 'ring', 'pinky'];
 
 fingers.forEach(finger => {
-  document.getElementById(finger).onclick = (event) => {
-    const date = new Date();
-    localStorage.setItem(finger, date);
-    event.currentTarget.setAttribute('class', 'clicked');
-  }
-  const lastClicked = new Date(localStorage.getItem(finger));
-  if (lastClicked) {
-    const today = new Date();
-    const millisecondsPerDay = 1000*60*60*24;
-    const timeDifference = today.getTime() - lastClicked.getTime();
-    const daysDifference = Math.round( timeDifference / millisecondsPerDay );
-    document.getElementById(finger + 'Text').innerHTML = daysDifference;
+  setup(finger + 'Left');
+  setup(finger + 'Right');
+  function setup(id) {
+    document.getElementById(id).onclick = (event) => {
+      const date = new Date();
+      localStorage.setItem(id, date);
+      event.currentTarget.setAttribute('class', 'clicked');
+    }
+    const lastClicked = localStorage.getItem(id);
+    if (lastClicked) {
+      const lastClickedDate = new Date(lastClicked);
+      const today = new Date();
+      const millisecondsPerDay = 1000*60*60*24;
+      const timeDifference = today.getTime() - lastClickedDate.getTime();
+      const daysDifference = Math.round( timeDifference / millisecondsPerDay );
+      document.getElementById(id + 'Text').innerHTML = daysDifference;
+    }
   }
 });
