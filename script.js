@@ -11,10 +11,10 @@ function showDaysSinceClicked(id, lastClicked) {
 }
 
 function setup(id) {
-  document.getElementById(id).onclick = (event) => {
+  document.getElementById(id + 'Group').onclick = (event) => {
     const date = new Date();
     localStorage.setItem(id, date);
-    event.currentTarget.setAttribute('class', 'clicked');
+    document.getElementById(id).setAttribute('class', 'clicked');
   }
 
   const lastClicked = localStorage.getItem(id);

@@ -6,3 +6,7 @@ div#hands {
   display: flex;
   justify-content: space-evenly;
 }
+
+#hands g rect + text {
+  cursor: default;
+}
